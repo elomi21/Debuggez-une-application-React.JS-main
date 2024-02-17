@@ -15,4 +15,4 @@ export const MONTHS = {
 
 export const getMonth = (date) => MONTHS[date.getMonth()];
 
-/* modif de l'indexation des mois dans la variable MONTH pour correspondre à l'indexation de la méthode getMonth janvier étant indexé à o (mdn Date.prototype.getMonth()) */
+/* modif de l'indexation des mois dans la variable MONTH pour correspondre à l'indexation de la méthode getMonth janvier étant indexé à 0 (mdn Date.prototype.getMonth()) */
