@@ -54,3 +54,7 @@ const Slider = () => {
 };
 
 export default Slider;
+
+/* problème réglé pour la slide ne saffichant pas: */
+/* modif du nom sur le fichier de l'image supp de l'espace avant le 1 idem sur le events.json */
+/* problème d'affichage des slides + leur date résolus grace à modif du fichier index.js de DataContext */
