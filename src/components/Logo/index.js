@@ -121,5 +121,5 @@ Logo.defaultProps = {
 
 export default Logo;
 
-/* modif SVG sur style des "font-..." plus de tiret et second mon 1er lettre en majuscule
+/* modif SVG sur style des "font-..." plus de tiret et second mot 1er lettre en majuscule
  */
