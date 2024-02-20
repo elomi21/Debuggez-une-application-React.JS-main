@@ -16,6 +16,7 @@ const Slider = () => {
       5000
     );
   };
+
   useEffect(() => {
     nextCard();
   });
@@ -30,7 +31,7 @@ const Slider = () => {
         >
           <img src={event.cover} alt="forum" />
           <div className="SlideCard__descriptionContainer">
-            <div className="SlideCard__description">
+            <div key={event.title} className="SlideCard__description">
               <h3>{event.title}</h3>
               <p>{event.description}</p>
               <div>{getMonth(new Date(event.date))}</div>
@@ -42,10 +43,11 @@ const Slider = () => {
         <div className="SlideCard__pagination">
           {byDateDesc?.map((_, radioIdx) => (
             <input
-              key={`${radioIdx.id}`}
+              key={radioIdx.id}
               type="radio"
               name="radio-button"
               checked={index === radioIdx}
+              readOnly
             />
           ))}
         </div>
@@ -59,4 +61,6 @@ export default Slider;
 /* Modif du nom sur le fichier de l'image supp de l'espace avant le 1 idem sur le events.json
 /* Problème d'affichage des mois résolus grace à modif du fichier index.js de Date dans helpers */
 /* Problème réglé pour la slide en trop: Il nous faut 3 slides et non 4.Il y a une erreur dans le code de la fonction nextCard, il faut enlever 1 à byDateDesc.length.
-/* Erreur sur la fonction qui permet l'affichage des ratio, manque "?" avant la méthode .map pour savoir si byDateDesc est bien définit + erreur sur la key et checked car reprend des valeurs accéssibles uniquement dans la fonction précédente */
+/* modif du code pour retirer <div className="SlideCard__paginationContainer"> de la boucle qui génére les slides car on avait à chaque boucle une slide + un container pagination avec 3 radios */
+/* supression des balises de frangments car un fragment doit contenir au moins 2 enfants */
+/* Erreur sur la fonction qui permet l'affichage des radio, manque "?" avant la méthode .map pour savoir si byDateDesc est bien définit + erreur sur la key et checked car reprend des valeurs accéssibles uniquement dans la fonction précédente */

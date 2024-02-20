@@ -17,6 +17,7 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
           name={name}
           placeholder={placeholder}
           data-testid="field-testid"
+          required
         />
       );
       break;
@@ -30,6 +31,7 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
           name={name}
           placeholder={placeholder}
           data-testid="field-testid"
+          required
         />
       );
   }
@@ -55,3 +57,5 @@ Field.propTypes = {
  }
 
 export default Field;
+
+/* MODIF: ajout de required dans input type text car possibilité d'envoi sans mettre de texte */
