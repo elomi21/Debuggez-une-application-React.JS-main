@@ -1,22 +1,36 @@
+import { useState, useEffect } from "react";
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
 import EventCard from "../../components/EventCard";
 import PeopleCard from "../../components/PeopleCard";
-
 import "./style.scss";
 import EventList from "../../containers/Events";
 import Slider from "../../containers/Slider";
 import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
+import NoPicture from "../../picture-svgrepo-com-1.svg"
 import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
-
 /* modif effectué: ajout des id pour coordonner les liens de la nav dans le containers Menu */
+/* modif effectué pour afficher le dernier événement dans le footer: on met de base last === null avec useState puis utilisation de useEffect pour la mise à jour des données à chaque fois que const data change , on utilise la methode reduce pour garder l'évenement dont la date est la plus récente */
+/* dans le html ajout d'une condition si last === null on affiche une EventCard custom pour cette état sinon on affiche bien bien la card correspondant au dernier event en date */
 
 const Page = () => {
-  const {last} = useData()
+  const  data  = useData();
+  const [last, setLast] = useState(null);
+
+  useEffect(() => {
+    if (data && data?.data?.events?.length > 0) {
+      setLast(
+        data?.data?.events?.reduce(
+          (evtA, evtB) =>
+            new Date(evtA.date) > new Date(evtB.date) ? evtA : evtB
+        )
+      );
+    }
+  });
   return (
     <>
       <header>
@@ -123,13 +137,24 @@ const Page = () => {
       <footer className="row">
         <div className="col presta">
           <h3>Notre dernière prestation</h3>
-          <EventCard
-            imageSrc={last?.cover}
-            title={last?.title}
-            date={new Date(last?.date)}
-            small
-            label="boom"
-          />
+          {last === null ? (
+            <EventCard
+              imageSrc={NoPicture}
+              imageAlt=""
+              title="Oups! Problème d'affichage"
+              date={new Date("")}
+              label="boom"
+              small
+            />
+          ) : (
+            <EventCard
+              imageSrc={last.cover}
+              title={last.title}
+              date={new Date(last.date)}
+              small
+              label={last.type}
+            />
+          )}
         </div>
         <div className="col contact">
           <h3>Contactez-nous</h3>
@@ -163,6 +188,6 @@ const Page = () => {
       </footer>
     </>
   );
-}
+};
 
 export default Page;
