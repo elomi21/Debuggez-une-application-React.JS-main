@@ -9,7 +9,7 @@ import Slider from "../../containers/Slider";
 import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
-import NoPicture from "../../picture-svgrepo-com-1.svg"
+import NoPicture from "../../picture-svgrepo-com-1.svg";
 import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
@@ -18,15 +18,14 @@ import { useData } from "../../contexts/DataContext";
 /* dans le html ajout d'une condition si last === null on affiche une EventCard custom pour cette état sinon on affiche bien bien la card correspondant au dernier event en date */
 
 const Page = () => {
-  const  data  = useData();
+  const data = useData();
   const [last, setLast] = useState(null);
 
   useEffect(() => {
     if (data && data?.data?.events?.length > 0) {
       setLast(
-        data?.data?.events?.reduce(
-          (evtA, evtB) =>
-            new Date(evtA.date) > new Date(evtB.date) ? evtA : evtB
+        data?.data?.events?.reduce((evtA, evtB) =>
+          new Date(evtA.date) > new Date(evtB.date) ? evtA : evtB
         )
       );
     }
