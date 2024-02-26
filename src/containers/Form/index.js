@@ -4,7 +4,12 @@ import Field, { FIELD_TYPES } from "../../components/Field";
 import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
 
-const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 1000); })
+/* érreur corrigée dans le composant Form, rajout de onSuccess() dans try car si l'appel à l'api est réussi et que l'envoi du formulaire est terminé alors la fonction onsuccess s'éxécute. Dans notre cas, losqu'elle s'éxécute elle appelle une autre fonction setIsOpened (voir page Home) qui affiche la modale de validation du formulaire */
+
+const mockContactApi = () =>
+  new Promise((resolve) => {
+    setTimeout(resolve, 1000);
+  });
 
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
@@ -16,6 +21,7 @@ const Form = ({ onSuccess, onError }) => {
       try {
         await mockContactApi();
         setSending(false);
+        onSuccess();
       } catch (err) {
         setSending(false);
         onError(err);
@@ -32,7 +38,7 @@ const Form = ({ onSuccess, onError }) => {
           <Select
             selection={["Personnel", "Entreprise"]}
             onChange={() => null}
-            label="Personnel / Entreprise"
+            label="Personel / Entreprise"
             type="large"
             titleEmpty
           />
@@ -56,14 +62,13 @@ const Form = ({ onSuccess, onError }) => {
 Form.propTypes = {
   onError: PropTypes.func,
   onSuccess: PropTypes.func,
-}
+};
 
 Form.defaultProps = {
   onError: () => null,
   onSuccess: () => null,
-}
+};
 
 export default Form;
 
 /* erreur d'ortographe sue le mot personnel écrit "personel" */
-/* */
