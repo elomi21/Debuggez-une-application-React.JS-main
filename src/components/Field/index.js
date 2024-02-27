@@ -23,7 +23,7 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
       );
       break;
     case FIELD_TYPES.INPUT_EMAIL:
-      component = <input type="email" id="email" data-testid="field-testid"/>;
+      component = <input type="email" data-testid="field-testid" required/>;
       break;
     case FIELD_TYPES.TEXTAREA:
       component = <textarea name={name} data-testid="field-testid" required/>;

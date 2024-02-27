@@ -12,7 +12,6 @@ import Form from "../../containers/Form";
 import NoPicture from "../../picture-svgrepo-com-1.svg";
 import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
-
 /* modif effectué: ajout des id pour coordonner les liens de la nav dans le containers Menu */
 /* modif effectué pour afficher le dernier événement dans le footer: on met de base last === null avec useState puis utilisation de useEffect pour la mise à jour des données à chaque fois que const data change , on utilise la methode reduce pour garder l'évenement dont la date est la plus récente */
 /* dans le html ajout d'une condition si last === null on affiche une EventCard custom pour cette état sinon on affiche bien bien la card correspondant au dernier event en date */
